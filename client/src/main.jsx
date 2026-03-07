@@ -7,9 +7,14 @@ import { appStore } from './app/store'
 import { Toaster } from 'sonner'
 import { useLoadUserQuery } from './features/api/authApi'
 import LoadingSpinner from './components/LoadingSpinner'
+import { useSelector } from 'react-redux'
 
 const Custom = ({ children }) => {
-  const { isLoading } = useLoadUserQuery();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const { isLoading } = useLoadUserQuery(undefined, {
+    skip: !isAuthenticated
+  });
   return <>{isLoading ? <LoadingSpinner></LoadingSpinner> : <>{children}</>}</>;
 }
 createRoot(document.getElementById('root')).render(
