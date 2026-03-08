@@ -4,7 +4,7 @@ import { generateToken } from "../utils/generateToken.js";
 import { deleteMedia, uploadMedia } from "../utils/cloudinary.js"
 export const register = async (req, res) => {
     try {
-        const { name, email, password } = req.body;
+        const { name, email, password,role,instructorKey} = req.body;
         if (!name || !email || !password) {
             return res.status(400).json({
                 success: false,
@@ -19,6 +19,21 @@ export const register = async (req, res) => {
             })
         }
         const hashedPassword = await bcrypt.hash(password, 10)
+
+        let userRole = "student";
+
+        if(role === "instructor"){
+
+            if(instructorKey !== process.env.INSTRUCTOR_SECRET){
+                return res.status(403).json({
+                    success:false,
+                    message:"Invalid Instructor key"
+                })
+            }
+
+            userRole = "instructor";
+        }
+
         await User.create({
             name,
             email,

@@ -16,20 +16,28 @@ const CourseTab = () => {
     const params = useParams();     //app.jsx /course/:courseId same name to receive
     const courseId = params.courseId;
     //hook 
-    const [input, setInput] = useState(null);           //never initialize state until actual course data arrive (the "" are cached and form doesnt update with new data)
+    const [input, setInput] = useState({
+        courseTitle: "",
+        subTitle: "",
+        description: "",
+        category: "",
+        courseLevel: "",
+        coursePrice: "",
+        courseThumbnail: ""
+    });
 
     const { data: courseByIdData, isLoading: courseByIdIsLoading, isSuccess: courseByIdIsSuccess, refetch } = useGetCourseByIdQuery(courseId, { refetchOnMountOrArgChange: true });
     useEffect(() => {
         const course = courseByIdData?.course;
         if (course) {
             setInput({      //initialize when course data come
-                courseTitle: course.courseTitle,
-                subTitle: course.subTitle,
-                description: course.description,
-                category: course.category,
-                courseLevel: course.courseLevel,
-                coursePrice: course.coursePrice,
-                courseThumbnail: course.courseThumbnail
+                courseTitle: course.courseTitle || "",
+                subTitle: course.subTitle || "",
+                description: course.description || "",
+                category: course.category || "",
+                courseLevel: course.courseLevel || "",
+                coursePrice: course.coursePrice || "",
+                courseThumbnail: course.courseThumbnail || ""
             });
             if (course.courseThumbnail) {
                 setPreviewThumbnail(course.courseThumbnail);
@@ -67,13 +75,18 @@ const CourseTab = () => {
     }
     const updateCourseHandler = async () => {
         const formData = new FormData();
-        if (input.courseTitle) formData.append("courseTitle", input.courseTitle);
-        if (input.subTitle) formData.append("subTitle", input.subTitle);
-        if (input.description) formData.append("description", input.description);
-        if (input.category) formData.append("category", input.category);
-        if (input.courseLevel) formData.append("courseLevel", input.courseLevel);
-        if (input.coursePrice) formData.append("coursePrice", input.coursePrice);
-        if (input.courseThumbnail) formData.append("courseThumbnail", input.courseThumbnail);
+        formData.append("courseTitle", input.courseTitle);
+        formData.append("subTitle", input.subTitle);
+        formData.append("description", input.description);
+        formData.append("category", input.category);
+        formData.append("courseLevel", input.courseLevel);
+        formData.append("coursePrice", input.coursePrice);
+
+        // Only append if it's a file object (not a string URL)
+        if (input.courseThumbnail instanceof File) {
+            formData.append("courseThumbnail", input.courseThumbnail);
+        }
+
         await editCourse({ formData, courseId });
     }
     const publishStatusHandler = async (action) => {

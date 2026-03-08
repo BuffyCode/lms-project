@@ -4,6 +4,7 @@ import Course from './Course';
 import { useGetPublishedCourseQuery } from '@/features/api/courseApi';
 const Courses = () => {
     const { data, isLoading, error } = useGetPublishedCourseQuery();
+
     if (error) <>Some error occur in fetching courses</>
     return (
         <div className='bg-gray-50'>
