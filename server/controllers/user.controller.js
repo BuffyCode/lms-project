@@ -2,6 +2,8 @@ import { User } from "../models/user.model.js"
 import bcrypt from "bcryptjs"
 import { generateToken } from "../utils/generateToken.js";
 import { deleteMedia, uploadMedia } from "../utils/cloudinary.js"
+
+//for registering the user
 export const register = async (req, res) => {
     try {
         const { name, email, password,role,instructorKey} = req.body;
@@ -11,6 +13,7 @@ export const register = async (req, res) => {
                 message: "All fields are required"
             })
         }
+        //finding the user is already registered or not
         const user = await User.findOne({ email });
         if (user) {
             return res.status(400).json({
@@ -18,6 +21,7 @@ export const register = async (req, res) => {
                 message: "User already registed"
             })
         }
+        //storing the password in hashed form to prevent an authorized access to the account
         const hashedPassword = await bcrypt.hash(password, 10)
 
         let userRole = "student";
@@ -34,6 +38,7 @@ export const register = async (req, res) => {
             userRole = "instructor";
         }
 
+        //if user is not present , just create a entry in the user schema
         await User.create({
             name,
             email,
@@ -53,6 +58,8 @@ export const register = async (req, res) => {
 
     }
 }
+
+//for login
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -89,6 +96,8 @@ export const login = async (req, res) => {
         })
     }
 }
+
+//for logging off...
 export const logout = async (req, res) => {
     try {
         return res.status(200).cookie("token", "", { maxAge: 0 }).json({
@@ -103,6 +112,8 @@ export const logout = async (req, res) => {
         })
     }
 }
+
+
 export const getUserProfile = async (req, res) => {
     try {
         const userId = req.id;

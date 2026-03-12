@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
+    //data definitions 
     name: {
         type: String,
         required: true,
@@ -28,6 +29,8 @@ const userSchema = new mongoose.Schema({
         default: "",
     }
 }, {
+    //schema configuration / schema options
+    //for automation : how ? mongoose will automatically take care of time updation here, when the user was created or updated
     timestamps: true,
 })
 export const User = mongoose.model("user", userSchema)

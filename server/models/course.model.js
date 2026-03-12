@@ -1,5 +1,6 @@
 import mongoose, { mongo } from "mongoose";
 
+//creation of schema
 const courseSchema = new mongoose.Schema({
     courseTitle: {
         type: String,
@@ -34,7 +35,7 @@ const courseSchema = new mongoose.Schema({
     lectures: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'lecture',
+            ref: 'lecture',      // reference of lecture schema
         }
     ],
     creator: {
