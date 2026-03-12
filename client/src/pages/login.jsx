@@ -74,14 +74,14 @@ const Login = () => {
                 <Tabs defaultValue="login">
 
                     <TabsList>
-                        <TabsTrigger value="login">login</TabsTrigger>
-                        <TabsTrigger value="signup">signup</TabsTrigger>
+                        <TabsTrigger value="login">Login</TabsTrigger>
+                        <TabsTrigger value="signup">Sign Up</TabsTrigger>
                     </TabsList>
 
                     <TabsContent value="login">
                         <Card>
                             <CardHeader>
-                                <CardTitle>login</CardTitle>
+                                <CardTitle className='mt-2'>Login</CardTitle>
                                 <CardDescription>
                                     Enter your credentials if you have already registered.
                                 </CardDescription>
@@ -94,13 +94,13 @@ const Login = () => {
 
                                 <div className="grid gap-3">
                                     <Label htmlFor="password">Password</Label>
-                                    <Input name="password" value={loginInput.password} onChange={(e) => inputChangeHandler(e, "login")} type="password" placeholder="########" required />
+                                    <Input name="password" value={loginInput.password} onChange={(e) => inputChangeHandler(e, "login")} type="password" placeholder="Enter your Password" required />
                                 </div>
 
                             </CardContent>
 
                             <CardFooter>
-                                <Button disabled={loginIsLoading} onClick={() => handleRegistration("login")}>
+                                <Button className='m-auto p-auto' disabled={loginIsLoading} onClick={() => handleRegistration("login")}>
                                     {
                                         loginIsLoading ? (
                                             <>
@@ -117,7 +117,7 @@ const Login = () => {
                     <TabsContent value="signup">
                         <Card>
                             <CardHeader>
-                                <CardTitle>signup</CardTitle>
+                                <CardTitle className='mt-2'>Sign Up</CardTitle>
                                 <CardDescription>
                                     Enter Sign up details for new registration.
                                 </CardDescription>
@@ -126,7 +126,7 @@ const Login = () => {
 
                                 <div className="grid gap-3">
                                     <Label htmlFor="name">Name</Label>
-                                    <Input name="name" value={signupInput.name} onChange={(e) => inputChangeHandler(e, "signup")} type="text" placeholder="Chetna Dua" required />
+                                    <Input name="name" value={signupInput.name} onChange={(e) => inputChangeHandler(e, "signup")} type="text" placeholder="Enter your Name" required />
                                 </div>
 
                                 <div className="grid gap-3">
@@ -136,16 +136,16 @@ const Login = () => {
 
                                 <div className="grid gap-3">
                                     <Label htmlFor="password">Password</Label>
-                                    <Input name="password" value={signupInput.password} onChange={(e) => inputChangeHandler(e, "signup")} type="password" placeholder="########" required />
+                                    <Input name="password" value={signupInput.password} onChange={(e) => inputChangeHandler(e, "signup")} type="password" placeholder="Enter your password" required />
                                 </div>
 
                             </CardContent>
                             <CardFooter>
-                                <Button disabled={registerIsLoading} onClick={() => handleRegistration("signup")}>
+                                <Button className='m-auto' disabled={registerIsLoading} onClick={() => handleRegistration("signup")}>
                                     {
                                         registerIsLoading ? (
                                             <>
-                                                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                                <Loader2 className="mr-2 h-4 w-4 animate-spin p" />
                                                 Signing up...
                                             </>
                                         ) : "sign up"
