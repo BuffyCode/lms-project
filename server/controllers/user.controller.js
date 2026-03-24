@@ -177,3 +177,27 @@ export const updateProfile = async (req, res) => {
     }
 }
 
+// for changing the role of student to instructor
+export const updateToInstructor = async (req, res) => {
+    try {
+        const userId = req.id; // From your auth middleware
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found", success: false });
+        }
+
+        // Update role
+        user.role = "instructor";
+        await user.save();
+
+        return res.status(200).json({
+            message: "Success! You are now an Instructor.",
+            success: true,
+            user // Send back the updated user object
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ message: "Failed to update role" });
+    }
+};
