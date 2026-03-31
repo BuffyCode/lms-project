@@ -3,6 +3,7 @@ import HeroSection from "./pages/student/HeroSection";
 import Courses from "./pages/student/Courses";
 import MyLearning from "./pages/student/MyLearning";
 import Profile from "./pages/student/Profile";
+import CourseDetail from "./pages/student/CourseDetail";
 
 import Sidebar from "./pages/admin/Sidebar";
 import Dashboard from "./pages/admin/Dashboard";
@@ -52,6 +53,10 @@ const appRouter = createBrowserRouter([
           {
             path: "profile",
             element: <Profile />,
+          },
+          {
+            path: "course-detail/:courseId",
+            element: <CourseDetail/>,
           },
         ],
       },
