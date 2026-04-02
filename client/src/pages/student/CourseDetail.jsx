@@ -1,9 +1,17 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { BadgeInfo, PlayCircle, Users, Lock, Play } from 'lucide-react' // Added Lock and Play
+import { BadgeInfo, PlayCircle, Users, Lock, Play ,Check} from 'lucide-react' // Added Lock and Play
 import React from 'react'
 import { Button } from '@/components/ui/button'
 
 function CourseDetail() {
+    const courseLearnPoints = [
+        "Master MERN stack from scratch",
+        "Build a professional LMS project",
+        "Handle complex Authentication & Authorization",
+        "Integrate Cloudinary for image and video uploads",
+        "State management using Redux Toolkit",
+        "Deploying full-stack apps to Vercel and Render"
+    ];
     return (
         <div className='w-full'>
             {/* Dark Header Section */}
@@ -36,9 +44,20 @@ function CourseDetail() {
 
             {/* Main Content & Sidebar Grid */}
             <div className='max-w-7xl mx-auto my-10 px-4 md:px-8 flex flex-col lg:flex-row gap-10'>
-                
+
                 {/* Left Side: Course Info & Lectures */}
                 <div className='w-full lg:w-[65%] space-y-8'>
+                    <div className='border-gray-200 p-6 mb-4'>
+                        <h1 className='font-bold text-xl'>What you'll learn</h1>
+                        <div className='grid-cols-2 md:grid-cols-2 gap-4'>
+                            {courseLearnPoints.map((point,idx)=>(
+                                <div key={idx} className='flex items-start gap-3 text-sm'>
+                                    <Check className="h-5 w-5 text-green-500 flex-shrink-0"/>
+                                    <p className='font-medium text-gray-700 dark:text-gray-300'>{point}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                     <div className='space-y-4'>
                         <h1 className='font-bold text-2xl md:text-3xl'>Description</h1>
                         <p className='text-sm leading-relaxed text-gray-700 dark:text-gray-300'>
@@ -74,10 +93,10 @@ function CourseDetail() {
                         <CardContent className='p-0 flex flex-col'>
                             {/* Video Preview Aspect Ratio Box */}
                             <div className='w-full aspect-video bg-black relative flex items-center justify-center group cursor-pointer'>
-                                <img 
-                                    src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" 
-                                    alt="Course Thumbnail" 
-                                    className='w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity' 
+                                <img
+                                    src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg"
+                                    alt="Course Thumbnail"
+                                    className='w-full h-full object-cover opacity-60 group-hover:opacity-40 transition-opacity'
                                 />
                                 <div className='absolute bg-white/20 p-4 rounded-full backdrop-blur-sm group-hover:scale-110 transition-transform'>
                                     <Play size={32} className='text-white fill-white' />
