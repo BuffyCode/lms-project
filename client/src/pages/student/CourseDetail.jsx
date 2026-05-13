@@ -2,6 +2,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { BadgeInfo, PlayCircle, Users, Lock, Play ,Check} from 'lucide-react' // Added Lock and Play
 import React from 'react'
 import { Button } from '@/components/ui/button'
+import BuyCourseButton from '@/components/BuyCourseButton';
 
 function CourseDetail() {
     const courseLearnPoints = [
@@ -106,9 +107,7 @@ function CourseDetail() {
 
                             <div className='p-6 space-y-4'>
                                 <h1 className='text-3xl font-bold'>₹499</h1>
-                                <Button className='w-full bg-blue-600 hover:bg-blue-700 py-6 text-lg font-bold'>
-                                    Buy Now
-                                </Button>
+                                <BuyCourseButton />
                                 <div className='text-xs text-center text-gray-500 space-y-2'>
                                     <p>Full Lifetime Access</p>
                                     <p>Access on mobile and TV</p>
